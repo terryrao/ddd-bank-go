@@ -22,9 +22,9 @@ func (r *Amount) Plus(amount *Amount) Amount {
 }
 
 //Minus minus amount
-func (r *Amount) Minus(amount Amount) *Amount {
+func (r *Amount) Minus(amount *Amount) Amount {
 	r.euros -= amount.euros
-	return r
+	return *r
 }
 
 //Times times

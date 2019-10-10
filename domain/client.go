@@ -76,11 +76,24 @@ func (r *Client) findDestinationAccount(no *AccountNo) *Account {
 }
 
 //Transfer
-func (r *Client) Transfer(source, destination AccountNo, amount Amount) {
+func (r *Client) Transfer(source, destination *AccountNo, amount *Amount) error {
+	if amount.ToDouble() <= 0 {
+		return fmt.Errorf("illegalArgument trnafer money %.2f", amount.ToDouble())
+	}
+
+	dest := r.findDestinationAccount(destination)
+	sourceAccount := r.findDestinationAccount(source)
+	if sourceAccount == nil {
+		return fmt.Errorf("illegalArgument source Account not foud %d", source)
+	}
+	dest.Balance = dest.Balance.Plus(amount)
+	sourceAccount.Balance = sourceAccount.Balance.Minus(amount)
+	return nil
 
 }
 
-//AddAccountManager
+//AddAccountManager Adds the given manager Client to the given account in the role as
+// manager, but not owner
 func (r *Client) AddAccountManager(account Account, manager Client) *AccountAccess {
 	return nil
 }
