@@ -1,0 +1,27 @@
+syntax = "proto3";
+package api;
+
+
+service ClientApi {
+    rpc Save (Client) returns (Result) {
+    }
+}
+
+message Client {
+
+    string username = 1;
+
+    int64 birthDate = 2;
+
+}
+
+message Result {
+
+    bool result = 1;
+
+}
+
+
+
+
+

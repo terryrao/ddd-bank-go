@@ -1,6 +1,7 @@
 package di
 
 import (
+	"ddd-bank-go/controller"
 	"ddd-bank-go/domain"
 	"ddd-bank-go/infrastructure/repository"
 	"ddd-bank-go/service"
@@ -38,11 +39,13 @@ func init() {
 		return &service.BankServiceImpl{ClientRepository: clientRepository}
 	})
 	checkErr(err)
-
 	//Container.Invoke(func(clientRepository domain_repository.ClientRepository,
 	//	accessRepository domain_repository.AccountAccessRepository,
 	//	accountRepository domain_repository.AccountRepository) *domain.Client {
 	//})
+	err = Container.Provide(func(bankService service.BankService) *controller.BankController {
+		return &controller.BankController{BankService: bankService}
+	})
 
 }
 
