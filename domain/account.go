@@ -31,3 +31,9 @@ func GetMinimumBalance() Amount {
 func NewAccount(name string) *Account {
 	return &Account{Name: name}
 }
+
+type AccountRepository interface {
+	Find(no *AccountNo) *Account
+	DeleteAll()
+	Save(account *Account) *Account
+}
