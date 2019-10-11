@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"ddd-bank-go/domain/base"
 	"testing"
 )
 
@@ -9,7 +8,7 @@ func TestAccount_String(t *testing.T) {
 	t.Run("test String", func(t *testing.T) {
 		account := Account{
 			Name:    "test",
-			Entity:  base.Entity{Id: 12},
+			Id:      12,
 			Balance: Amount{100},
 		}
 

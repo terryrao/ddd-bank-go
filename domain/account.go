@@ -1,13 +1,12 @@
 package domain
 
 import (
-	"ddd-bank-go/domain/base"
 	"fmt"
 )
 
 //Account userAccount Domain entity
 type Account struct {
-	base.Entity
+	Id      int64
 	Name    string
 	Balance Amount
 }
@@ -30,10 +29,4 @@ func GetMinimumBalance() Amount {
 //NewAccount 构造器
 func NewAccount(name string) *Account {
 	return &Account{Name: name}
-}
-
-type AccountRepository interface {
-	Find(no *AccountNo) *Account
-	DeleteAll()
-	Save(account *Account) *Account
 }

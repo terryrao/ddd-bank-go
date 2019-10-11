@@ -128,13 +128,3 @@ func (r *Client) FindMyAccount(no *AccountNo) (*Account, error) {
 func (r *Client) AccountReport() string {
 	return ""
 }
-
-type ClientRepository interface {
-	DeleteAll()
-	Save(client *Client) (*Client, error)
-	Delete(client *Client)
-	Find(id float64) *Client
-	FindByName(username string) *Client
-	FindAll() []*Client
-	FindAllBornFrom(birthday time.Time) []*Client
-}
