@@ -67,9 +67,7 @@ func initGRPC() {
 }
 
 func regGRPCService(service *grpc.Server) {
-	var bankController *controller.BankController
 	_ = di.Container.Invoke(func(controller *controller.BankController) {
-		bankController = controller
+		api.RegisterClientApiServer(service, controller)
 	})
-	api.RegisterClientApiServer(service, bankController)
 }

@@ -12,12 +12,15 @@ type BankController struct {
 }
 
 func (b *BankController) Save(ctx context.Context, req *api.Client) (*api.Result, error) {
+	username := req.GetUsername()
+	date := req.GetBirthDate()
 	var birthday time.Time
-	timestamp := req.BirthDate
-	if timestamp > 0 {
-		birthday = time.Unix(timestamp, 0)
+	if date > 0 {
+		birthday = time.Unix(date, 0)
+
 	}
-	_, e := b.BankService.CreateClient(req.GetUsername(), birthday)
+	client := b.BankService.CreateClient(0, username, birthday)
+	e := client.CreateClient()
 	if e != nil {
 		return &api.Result{Result: false}, e
 	}

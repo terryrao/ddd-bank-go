@@ -2,6 +2,7 @@ package domain
 
 import (
 	"fmt"
+	"regexp"
 	"time"
 )
 
@@ -12,6 +13,7 @@ type Client struct {
 	BirthDate               time.Time
 	AccountRepository       AccountRepository       `xorm:"-"` //忽略字段
 	AccountAccessRepository AccountAccessRepository `xorm:"-"` // 忽略字段
+	ClientRepository        ClientRepository        `xorm:"-"` // 忽略字段
 }
 
 //<<constructors>>
@@ -57,6 +59,19 @@ func (r *Client) CreateAccount(userName string) *AccountAccess {
 	account := r.AccountRepository.Save(NewAccount(userName))
 	accountAccess := CreateAccountAccess(account, r, true)
 	return r.AccountAccessRepository.Save(accountAccess)
+}
+func (r *Client) CreateClient() error {
+	pat := `[a-z_A-Z][a-z_A-Z0-9]{0,30}`
+	compile, _ := regexp.Compile(pat)
+	match := compile.Match([]byte(r.UserName))
+	if !match {
+		return fmt.Errorf("illegal char in username")
+	}
+	_, e := r.ClientRepository.Save(r)
+	if e != nil {
+		return e
+	}
+	return nil
 }
 
 //Deposit

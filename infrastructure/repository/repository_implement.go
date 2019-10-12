@@ -47,3 +47,47 @@ func (c *ClientRepositoryImpl) FindAll() []*domain.Client {
 func (c *ClientRepositoryImpl) FindAllBornFrom(birthday time.Time) []*domain.Client {
 	panic("implement me")
 }
+
+type AccountRepositoryImpl struct {
+	Engine *xorm.Engine
+}
+
+func (a *AccountRepositoryImpl) Find(no *domain.AccountNo) *domain.Account {
+	panic("implement me")
+}
+
+func (a *AccountRepositoryImpl) DeleteAll() {
+	panic("implement me")
+}
+
+func (a *AccountRepositoryImpl) Save(account *domain.Account) *domain.Account {
+	panic("implement me")
+}
+
+type AccountAccessRepositoryImpl struct {
+	Engine *xorm.Engine
+}
+
+func (a *AccountAccessRepositoryImpl) DeleteAll() {
+	panic("implement me")
+}
+
+func (a *AccountAccessRepositoryImpl) Save(access *domain.AccountAccess) *domain.AccountAccess {
+	panic("implement me")
+}
+
+func (a *AccountAccessRepositoryImpl) Delete(access *domain.AccountAccess) {
+	panic("implement me")
+}
+
+func (a *AccountAccessRepositoryImpl) FindManagedAccountsOf(client *domain.Client, asOwner bool) []*domain.Client {
+	panic("implement me")
+}
+
+func (a *AccountAccessRepositoryImpl) FindFullAccounts(minBalance *domain.Account) []*domain.Account {
+	panic("implement me")
+}
+
+func (a *AccountAccessRepositoryImpl) Find(client *domain.Client, account *domain.Account) *domain.AccountAccess {
+	panic("implement me")
+}
